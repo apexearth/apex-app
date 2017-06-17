@@ -1,12 +1,15 @@
 {
   "name": "apex-app",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "For creating interactive apps using *pixi.js*.",
   "main": "src/index.js",
   "scripts": {
-    "test": "mocha src/**/*.spec.js"
+    "test": "mocha src/**.spec.js"
   },
-  "author": "",
+  "author": {
+    "name": "Christopher Jacobs",
+    "email": "apexearth@gmail.com"
+  },
   "license": "ISC",
   "dependencies": {
     "pixi.js": "^4.5.3"
