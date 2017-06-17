@@ -69,8 +69,8 @@ class AppObject {
     }
 
     update(seconds) {
-        this.updateMovement(seconds)
         this.updatePrevious()
+        this.updateMovement(seconds)
     }
 
     updateMovement(seconds) {
