@@ -168,13 +168,12 @@ class App extends EventEmitter {
 
     // Zoom Methods
     get zoom() {
-        const view = this.options.view
-        return Math.max(0, Math.min(1, (this.targetScale.x - view.zoomMin) / (view.zoomMax - view.zoomMin)))
+        return this.targetScale.x
     }
 
     set zoom(val) {
         const view         = this.options.view
-        this.targetScale.x = this.targetScale.y = Math.max(view.zoomMin, Math.min(view.zoomMax, view.zoomMin + val * (view.zoomMax - view.zoomMin)))
+        this.targetScale.x = this.targetScale.y = Math.max(view.zoomMin, Math.min(view.zoomMax, val))
     }
 
     updateZoom(seconds) {
