@@ -177,7 +177,7 @@ class App extends EventEmitter {
     }
 
     updateZoom(seconds) {
-        if (Math.abs(this.scale.x - this.targetScale.x) > .01) {
+        if (Math.abs(this.scale.x - this.targetScale.x) > .000001) {
             let amount   = (this.targetScale.x - this.scale.x) * seconds * 10
             this.scale.x = this.scale.y += amount
             this.position.x += (this.position.x - _window.innerWidth / 2) * amount / (this.scale.x - amount)
