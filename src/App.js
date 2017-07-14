@@ -120,6 +120,8 @@ class App extends EventEmitter {
         this.objects.push(object)
         if (typeof window !== 'undefined') {
             this.container.addChild(object.container)
+        } else {
+            object.container.parent = this
         }
         return object
     }
