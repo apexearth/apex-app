@@ -77,6 +77,18 @@ class App extends EventEmitter {
         else if (!this._paused) this.emit('play', this)
     }
 
+    pauseRendering() {
+        this.renderer.pause()
+    }
+
+    resumeRendering() {
+        this.renderer.resume()
+    }
+
+    kill() {
+        this.renderer.kill()
+    }
+
     togglePause() {
         this.paused = !this.paused
     }

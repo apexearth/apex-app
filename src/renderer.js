@@ -15,7 +15,14 @@ if (typeof window !== 'undefined') {
         const renderer = new PIXI.WebGLRenderer(screenWidth(), screenHeight(), Object.assign({antialias: true}, rendererOptions))
         document.body.appendChild(renderer.view)
 
-        renderer.kill  = () => {
+        renderer.pause = () => renderer.paused = true
+        renderer.resume = () => {
+            renderer.paused = false
+            last   = Date.now()
+            animate()
+        }
+
+        renderer.kill = () => {
             renderer.killed = true
             document.body.removeChild(renderer.view)
         }
@@ -25,6 +32,7 @@ if (typeof window !== 'undefined') {
         animate()
 
         function animate() {
+            if (renderer.paused) return
             if (renderer.killed) return
             requestAnimationFrame(animate)
             let current = Date.now()
