@@ -18,7 +18,7 @@ if (typeof window !== 'undefined') {
         renderer.pause = () => renderer.paused = true
         renderer.resume = () => {
             renderer.paused = false
-            last   = Date.now()
+            last            = Date.now()
             animate()
         }
 
@@ -29,12 +29,26 @@ if (typeof window !== 'undefined') {
 
         let {root} = app
         let last   = Date.now()
+        let rafing = false
+
         animate()
+
+        function queueAnimation() {
+            // prevent double rafing.
+            if (!rafing) {
+                rafing = true
+                requestAnimationFrame(() => {
+                    rafing = false
+                    animate()
+                })
+            }
+        }
 
         function animate() {
             if (renderer.paused) return
             if (renderer.killed) return
-            requestAnimationFrame(animate)
+
+            queueAnimation()
             let current = Date.now()
             let time    = Math.min((current - last) / 1000, 30 / 1000)
             app.update(time)
