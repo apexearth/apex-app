@@ -30,6 +30,8 @@ class App extends EventEmitter {
         this.container.position.x = this.screenWidth / 2
         this.container.position.y = this.screenHeight / 2
 
+        this.zoomSpeed = 10
+
         this._paused = false
     }
 
@@ -189,7 +191,7 @@ class App extends EventEmitter {
     }
 
     updateZoom(seconds) {
-        let amount   = (this.targetScale.x - this.scale.x) * seconds * 10
+        let amount   = (this.targetScale.x - this.scale.x) * seconds * this.zoomSpeed
         this.scale.x = this.scale.y += amount
         this.position.x += (this.position.x - _window.innerWidth / 2) * amount / (this.scale.x - amount)
         this.position.y += (this.position.y - _window.innerHeight / 2) * amount / (this.scale.y - amount)
