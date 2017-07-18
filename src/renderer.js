@@ -12,7 +12,7 @@ if (typeof window !== 'undefined') {
     module.exports = (app, {
         rendererOptions
     }) => {
-        const renderer = new PIXI.WebGLRenderer(screenWidth(), screenHeight(), Object.assign({antialias: true}, rendererOptions))
+        const renderer = new PIXI.autoDetectRenderer(screenWidth(), screenHeight(), Object.assign({antialias: true}, rendererOptions))
         document.body.appendChild(renderer.view)
 
         renderer.pause = () => renderer.paused = true
