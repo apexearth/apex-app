@@ -3,7 +3,7 @@ if (typeof window !== 'undefined') {
 }
 const {EventEmitter} = require('events')
 const _window        = require('./window')
-const setting        = require('./sentting')
+const setting        = require('./setting')
 
 class App extends EventEmitter {
     constructor(options = {}) {
