@@ -3,7 +3,7 @@ if (typeof window !== 'undefined') {
 }
 const {EventEmitter} = require('events')
 const _window        = require('./window')
-
+const setting        = require('./sentting')
 
 class App extends EventEmitter {
     constructor(options = {}) {
@@ -38,8 +38,8 @@ class App extends EventEmitter {
     static get defaultOptions() {
         return {
             view: {
-                zoomMin: .1,
-                zoomMax: 2,
+                zoomMin: setting(.1, .0001, 1),
+                zoomMax: setting(2, 1, 100),
             }
         }
     }
@@ -187,7 +187,7 @@ class App extends EventEmitter {
 
     set zoom(val) {
         const view         = this.options.view
-        this.targetScale.x = this.targetScale.y = Math.max(view.zoomMin, Math.min(view.zoomMax, val))
+        this.targetScale.x = this.targetScale.y = Math.max(view.zoomMin.value, Math.min(view.zoomMax.value, val))
     }
 
     updateZoom(seconds) {
