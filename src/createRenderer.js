@@ -11,7 +11,11 @@ if (typeof window !== 'undefined') {
 
     module.exports = (app, options = {}) => {
         options.rendererOptions = options.rendererOptions || {}
-        const renderer          = new PIXI.autoDetectRenderer(screenWidth(), screenHeight(), Object.assign({antialias: true}, options.rendererOptions))
+        const renderer          = new PIXI.autoDetectRenderer(Object.assign({
+            width    : screenWidth(),
+            height   : screenHeight(),
+            antialias: true
+        }, options.rendererOptions))
         document.body.appendChild(renderer.view)
 
         renderer.pause = () => renderer.paused = true
