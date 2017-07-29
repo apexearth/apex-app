@@ -9,10 +9,9 @@ if (typeof window !== 'undefined') {
         return typeof window !== 'undefined' ? window.innerHeight : 500
     }
 
-    module.exports = (app, {
-        rendererOptions
-    }) => {
-        const renderer = new PIXI.autoDetectRenderer(screenWidth(), screenHeight(), Object.assign({antialias: true}, rendererOptions))
+    module.exports = (app, options = {}) => {
+        options.rendererOptions = options.rendererOptions || {}
+        const renderer          = new PIXI.autoDetectRenderer(screenWidth(), screenHeight(), Object.assign({antialias: true}, options.rendererOptions))
         document.body.appendChild(renderer.view)
 
         renderer.pause = () => renderer.paused = true
