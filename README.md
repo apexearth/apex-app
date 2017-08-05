@@ -7,7 +7,8 @@ For creating interactive apps using *pixi.js*.
 ```javascript
 const {App, AppObject, createRenderer} = require('apex-app')
 
-// Extend app, initialize with a single AppObject drawn as a white square.
+// Extend App
+// Initialize with a single AppObject drawn as a white square.
 class Game extends App {
     constructor() {
         super()
@@ -26,5 +27,4 @@ createRenderer(new Game(), {
     }
 })
  ```
- 
  

@@ -1,11 +1,12 @@
 {
   "name": "apex-app",
-  "version": "4.2.0",
+  "version": "4.2.1",
   "description": "For creating interactive apps using *pixi.js*.",
   "main": "src/index.js",
   "scripts": {
     "test": "mocha src/**.spec.js"
   },
+  "repository": "https://github.com/apexearth/apex-app",
   "author": {
     "name": "Christopher Jacobs",
     "email": "apexearth@gmail.com"
