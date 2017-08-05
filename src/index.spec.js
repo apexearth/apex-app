@@ -64,12 +64,11 @@ describe('apex-app', () => {
 
     it('.zoom', () => {
         const view       = app.view
-        const zoomRange  = view.zoomMax - view.zoomMin
         let initialScale = app.targetScale.x
         app.zoom += .1
         let postScale    = app.targetScale.x
         expect(initialScale).to.be.lt(postScale)
-        expect(postScale).to.equal(initialScale + zoomRange * .1)
+        expect(postScale).to.equal(initialScale + .1)
         app.zoom -= .1
 
         expect(app.position.x).to.equal(250)
@@ -89,14 +88,14 @@ describe('apex-app', () => {
         app.update(.1)
         app.zoom -= .1
         app.update(.1)
-        expect(app.position.x).to.equal(94.99999999999997)
-        expect(app.position.y).to.equal(94.99999999999997)
+        expect(app.position.x).to.equal(49.999999999999986)
+        expect(app.position.y).to.equal(49.999999999999986)
         app.zoom += .1
         app.update(.1)
         app.zoom += .1
         app.update(.1)
-        expect(app.position.x).to.equal(7.105427357601002e-15)
-        expect(app.position.y).to.equal(7.105427357601002e-15)
+        expect(app.position.x).to.equal(-3.552713678800501e-15)
+        expect(app.position.y).to.equal(-3.552713678800501e-15)
     })
 
     it('.add()', () => {

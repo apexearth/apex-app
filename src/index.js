@@ -4,4 +4,5 @@ module.exports = {
     createRenderer: require('./createRenderer'),
     PIXI          : typeof window !== 'undefined' ? require('pixi.js') : null,
     setting       : require('./setting'),
+    property      : require('./property'),
 }
