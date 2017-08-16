@@ -4,13 +4,17 @@ let id = 0
 
 class AppObject {
 
-    constructor({parent, position, momentum}) {
+    constructor({
+                    parent,
+                    position = {x: 0, y: 0},
+                    scale = {x: 0, y: 0},
+                    rotation = 0,
+                    momentum = {x: 0, y: 0}
+                }) {
         if (!parent) throw new Error('No parent recieved.')
         this.id     = id++
         this.parent = parent
         this.type   = 'object'
-        position    = position || {x: 0, y: 0}
-        momentum    = momentum || {x: 0, y: 0}
 
         if (typeof window !== 'undefined') {
             this.container = new PIXI.Container()
@@ -22,6 +26,9 @@ class AppObject {
 
         this.position.x    = position.x
         this.position.y    = position.y
+        this.scale.x       = scale.x
+        this.scale.y       = scale.y
+        this.rotation      = rotation
         this.momentum      = {
             x: momentum.x,
             y: momentum.y
@@ -39,6 +46,14 @@ class AppObject {
 
     get scale() {
         return this.container.scale
+    }
+
+    get rotation() {
+        return this.container.rotation
+    }
+
+    set rotation(r) {
+        this.container.rotation = r
     }
 
     get selected() {
