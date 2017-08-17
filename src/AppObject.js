@@ -7,7 +7,7 @@ class AppObject {
     constructor({
                     parent,
                     position = {x: 0, y: 0},
-                    scale = {x: 0, y: 0},
+                    scale = {x: 1, y: 1},
                     rotation = 0,
                     momentum = {x: 0, y: 0}
                 }) {
