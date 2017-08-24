@@ -9,9 +9,16 @@ if (typeof window !== 'undefined') {
         return typeof window !== 'undefined' ? window.innerHeight : 500
     }
 
-    module.exports = (app, options = {}) => {
-        options.rendererOptions = options.rendererOptions || {}
-        const renderer          = new PIXI.autoDetectRenderer(Object.assign({
+    module.exports = (app, options = {
+        destroyAccessibilityPlugins: true,
+        rendererOptions            : {},
+        uirendererOptions          : {}
+    }) => {
+        options.rendererOptions   = options.rendererOptions || {}
+        options.uirendererOptions = options.uirendererOptions || {}
+
+        // Main Renderer
+        const renderer = new PIXI.autoDetectRenderer(Object.assign({
             width    : screenWidth(),
             height   : screenHeight(),
             antialias: true
@@ -30,10 +37,18 @@ if (typeof window !== 'undefined') {
             document.body.removeChild(renderer.view)
         }
 
-        let {root} = app
-        let last   = Date.now()
-        let rafing = false
+        // UI Renderer
+        const uirenderer = new PIXI.autoDetectRenderer(Object.assign({
+            width      : screenWidth(),
+            height     : screenHeight(),
+            antialias  : true,
+            transparent: true
+        }, options.uirendererOptions))
+        document.body.appendChild(uirenderer.view)
 
+        let {root, uiroot} = app
+        let last           = Date.now()
+        let rafing         = false
         animate()
 
         function queueAnimation() {
@@ -61,8 +76,18 @@ if (typeof window !== 'undefined') {
             }
 
             renderer.render(root)
+            uirenderer.render(uiroot)
         }
 
-        return renderer
+        if (options.destroyAccessibilityPlugins) {
+            // Fix a bug where PIXI.js would place a <div> on top of everything after using inputs.
+            renderer.plugins.accessibility.destroy()
+            uirenderer.plugins.accessibility.destroy()
+        }
+
+        return {
+            renderer,
+            uirenderer
+        }
     }
 }

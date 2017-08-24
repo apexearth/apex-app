@@ -16,6 +16,7 @@ class App extends EventEmitter {
 
         if (typeof window !== 'undefined') {
             this.root      = new PIXI.Container()
+            this.uiroot    = new PIXI.Container()
             this.container = new PIXI.Container()
             this.root.addChild(this.container)
             this.fxcontainer = new PIXI.Container()
