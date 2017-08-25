@@ -73,6 +73,8 @@ if (typeof window !== 'undefined') {
             last = current
             if (window.innerWidth !== renderer.view.width || window.innerHeight !== renderer.view.height) {
                 renderer.resize(window.innerWidth, window.innerHeight)
+                uirenderer.resize(window.innerWidth, window.innerHeight)
+                renderer.clear()
             }
 
             renderer.render(root)

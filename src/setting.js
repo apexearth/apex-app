@@ -1,5 +1,5 @@
-module.exports = (value, min, max) => {
+module.exports = (value, min, max, type = "number") => {
     return {
-        value, min, max
+        value, min, max, type
     }
 }
