@@ -8,6 +8,7 @@ class AppObject {
                     parent,
                     position = {x: 0, y: 0},
                     scale = {x: 1, y: 1},
+                    pivot = {x: 0, y: 0},
                     rotation = 0,
                     momentum = {x: 0, y: 0}
                 }) {
@@ -21,13 +22,18 @@ class AppObject {
             this.graphics  = new PIXI.Graphics()
             this.container.addChild(this.graphics)
         } else {
-            this.container = {position: {x: 0, y: 0}, scale: {x: 1, y: 1}, width: 1, height: 1}
+            this.container = {
+                position: {x: 0, y: 0}, scale: {x: 1, y: 1},
+                pivot   : {x: 0, y: 0}, width: 1, height: 1
+            }
         }
 
         this.position.x    = position.x
         this.position.y    = position.y
         this.scale.x       = scale.x
         this.scale.y       = scale.y
+        this.pivot.x       = pivot.x
+        this.pivot.y       = pivot.y
         this.rotation      = rotation
         this.momentum      = {
             x: momentum.x,
@@ -50,6 +56,10 @@ class AppObject {
 
     get rotation() {
         return this.container.rotation
+    }
+
+    get pivot() {
+        return this.container.pivot
     }
 
     set rotation(r) {
