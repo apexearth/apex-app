@@ -112,7 +112,9 @@ class App extends EventEmitter {
         this.updateZoom(seconds)
         if (this.paused) return
 
+        this.objects.forEach(object => object.beforeUpdate(seconds))
         this.objects.forEach(object => object.update(seconds))
+        this.objects.forEach(object => object.afterUpdate(seconds))
 
         this.bringFxToFront()
     }
