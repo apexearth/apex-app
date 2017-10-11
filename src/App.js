@@ -69,6 +69,11 @@ class App extends EventEmitter {
         return typeof window !== 'undefined' ? window.innerHeight : 500
     }
 
+    centerOn(child) {
+        this.position.x = this.screenWidth / 2 - child.position.x * this.scale.x
+        this.position.y = this.screenHeight / 2 - child.position.y * this.scale.y
+    }
+
     // Pause
     get paused() {
         return this._paused

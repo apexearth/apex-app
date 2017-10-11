@@ -5,6 +5,7 @@ let id = 0
 class AppObject {
 
     constructor({
+                    app,
                     parent,
                     position = {x: 0, y: 0},
                     scale = {x: 1, y: 1},
@@ -12,8 +13,10 @@ class AppObject {
                     rotation = 0,
                     momentum = {x: 0, y: 0}
                 }) {
+        if (!app) throw new Error('No app recieved.')
         if (!parent) throw new Error('No parent recieved.')
         this.id     = id++
+        this.app    = app
         this.parent = parent
         this.type   = 'object'
 
@@ -93,9 +96,17 @@ class AppObject {
         )
     }
 
+    beforeUpdate(seconds) {
+        /* to be overridden */
+    }
+
     update(seconds) {
         this.updatePrevious()
         this.updateMovement(seconds)
+    }
+
+    afterUpdate(seconds) {
+        /* to be overridden */
     }
 
     updateMovement(seconds) {

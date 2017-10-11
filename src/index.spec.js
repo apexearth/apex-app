@@ -11,7 +11,7 @@ describe('apex-app', () => {
     beforeEach(() => app = new App())
 
     it('run', () => {
-        app.add(new AppObject({parent: app}))
+        app.add(new AppObject({app, parent: app}))
         for (let i = 0; i < 20; i++) {
             app.update(.01)
         }
@@ -19,9 +19,9 @@ describe('apex-app', () => {
     it('.select()', () => {
         app.position.x = 0
         app.position.y = 0
-        let object1    = app.add(new AppObject({parent: app, position: {x: 0, y: 0}}))
-        let object2    = app.add(new AppObject({parent: app, position: {x: 10, y: 10}}))
-        let object3    = app.add(new AppObject({parent: app, position: {x: -10, y: -10}}))
+        let object1    = app.add(new AppObject({app, parent: app, position: {x: 0, y: 0}}))
+        let object2    = app.add(new AppObject({app, parent: app, position: {x: 10, y: 10}}))
+        let object3    = app.add(new AppObject({app, parent: app, position: {x: -10, y: -10}}))
         app.select(0, 0, 10, 11)
         expect(object1.selected).to.equal(true)
         expect(object2.selected).to.equal(true)
@@ -99,12 +99,12 @@ describe('apex-app', () => {
     })
 
     it('.add()', () => {
-        app.add(new AppObject({parent: app, position: {x: 1, y: 2}}))
+        app.add(new AppObject({app, parent: app, position: {x: 1, y: 2}}))
         let object1 = app.objects[0]
         expect(object1.position).to.deep.equal({x: 1, y: 2})
     })
     it('.remove()', () => {
-        app.add(new AppObject({parent: app, position: {x: 1, y: 2}}))
+        app.add(new AppObject({app, parent: app, position: {x: 1, y: 2}}))
         app.remove(app.objects[0])
         expect(app.objects.length).to.equal(0)
     })
@@ -116,7 +116,7 @@ describe('apex-app', () => {
             expect(object).to.an('object')
         }
 
-        app.previewObject(new AppObject({parent: app}))
+        app.previewObject(new AppObject({app, parent: app}))
         expect(hit).to.equal(true)
     })
     it('.cancelPreview()', () => {
@@ -126,7 +126,7 @@ describe('apex-app', () => {
             expect(object).to.an('object')
         }
 
-        let object = app.previewObject(new AppObject({parent: app}))
+        let object = app.previewObject(new AppObject({app, parent: app}))
         app.cancelPreview(object)
         expect(hit).to.equal(true)
     })
