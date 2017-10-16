@@ -11,6 +11,7 @@ class App extends EventEmitter {
         this.options = Object.assign(App.defaultOptions, options)
         if (!this.options.view) throw new Error('View options are missing! Default: ' + JSON.stringify(App.defaultOptions.view))
 
+        this.type            = 'app'
         this.objects         = []
         this.selectedObjects = []
 
@@ -135,6 +136,10 @@ class App extends EventEmitter {
         while (i--) {
             this.remove(objects[i])
         }
+    }
+
+    contains(object) {
+        return this.objects.indexOf(object) !== -1
     }
 
     add(object) {
