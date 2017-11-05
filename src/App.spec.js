@@ -4,7 +4,7 @@ const {
           AppObject
       }             = require('./')
 
-describe('apex-app', () => {
+describe('App', () => {
 
     let app
 
@@ -16,6 +16,7 @@ describe('apex-app', () => {
             app.update(.01)
         }
     })
+
     it('.select()', () => {
         app.position.x = 0
         app.position.y = 0

@@ -2,22 +2,38 @@ const PIXI = typeof window !== 'undefined' ? require('pixi.js') : null
 
 let id = 0
 
+/**
+ * AppObjects which are added to the App.
+ */
 class AppObject {
 
+    /**
+     * Instantiate a new AppObject.
+     * @param app {App} - The App the AppObject belongs to.
+     * @param parent {App|AppObject} - The parent of the AppObject.
+     * @param player {object} - The player who owns the AppObject.
+     * @param position {object} - The position {x, y} of the AppObject.
+     * @param scale {object} - The scale {x, y} of the AppObject.
+     * @param pivot {object} - The pivot point {x, y} for rotation of the AppObject.
+     * @param rotation {object} - The rotation of the AppObject.
+     * @param momentum {object} - The movement speed of the AppObject.
+     * @param dampening {object} - The amount that momentum and rotation decreases over time.
+     */
     constructor({
-                    app,
-                    parent,
-                    player,
-                    position = {x: 0, y: 0},
-                    scale = {x: 1, y: 1},
-                    pivot = {x: 0, y: 0},
-                    rotation = 0,
-                    momentum = {x: 0, y: 0, rotation: 0},
-                    dampening = {x: 0, y: 0, rotation: 0}
-                }) {
+        app,
+        parent,
+        player,
+        position = {x: 0, y: 0},
+        scale = {x: 1, y: 1},
+        pivot = {x: 0, y: 0},
+        rotation = 0,
+        momentum = {x: 0, y: 0, rotation: 0},
+        dampening = {x: 0, y: 0, rotation: 0}
+    }) {
         if (!app) throw new Error('No app recieved.')
         if (!parent) throw new Error('No parent recieved.')
-        this.id     = id++
+
+        this.id = id++
         this.app    = app
         this.parent = parent
         this.player = player
@@ -53,7 +69,7 @@ class AppObject {
         }
         this.position_prev = {}
         this.momentum_prev = {}
-        this.updatePrevious()
+        this._updatePrevious()
         this._selected = false
         this.removed   = false
     }
@@ -82,6 +98,7 @@ class AppObject {
         return this._selected
     }
 
+    /** Select this AppObject. */
     select() {
         if (!this._selected) {
             this._selected = true
@@ -89,6 +106,7 @@ class AppObject {
         }
     }
 
+    /** Deselect this AppObject */
     deselect() {
         if (this._selected) {
             this._selected = false
@@ -96,6 +114,7 @@ class AppObject {
         }
     }
 
+    /** Check if provided coordinates are cause for the selection of this AppObject */
     selectionHitTest(minX, minY, maxX, maxY) {
         return !(
             this.position.x + this.container.width / 2 < minX ||
@@ -105,26 +124,46 @@ class AppObject {
         )
     }
 
+    /**
+     * The update operation to occur before all normal update operations within the App.
+     * @param seconds {number} - The number of seconds since the last update.
+     */
     beforeUpdate(seconds) {
         /* to be overridden */
     }
 
+    /**
+     * The update operation for the main loop of the App.
+     * @param seconds {number} - The number of seconds since the last update.
+     */
     update(seconds) {
-        this.updatePrevious()
+        this._updatePrevious()
         this.updateMovement(seconds)
         this.updateDampening(seconds)
     }
 
+    /**
+     * The update operation to occur after all normal update operations within the App.
+     * @param seconds {number} - The number of seconds since the last update.
+     */
     afterUpdate(seconds) {
         /* to be overridden */
     }
 
+    /**
+     * Update movement based on momentum.
+     * @param seconds {number} - The number of seconds since the last update.
+     */
     updateMovement(seconds) {
         this.position.x += this.momentum.x * seconds
         this.position.y += this.momentum.y * seconds
         this.rotation += this.momentum.rotation * seconds
     }
 
+    /**
+     * Update movement dampening, causing the AppObject to slow down.
+     * @param seconds {number} - The number of seconds since the last update.
+     */
     updateDampening(seconds) {
         if (this.dampening.x) {
             if (this.momentum.x > 0) {
@@ -149,7 +188,11 @@ class AppObject {
         }
     }
 
-    updatePrevious() {
+    /**
+     * Update the *_prev values.
+     * @private
+     */
+    _updatePrevious() {
         this.position_prev.x        = this.position.x
         this.position_prev.y        = this.position.y
         this.momentum_prev.x        = this.momentum.x
@@ -157,6 +200,9 @@ class AppObject {
         this.momentum_prev.rotation = this.momentum.rotation
     }
 
+    /**
+     * Update the visual appearance of the AppObject.
+     */
     draw() {
         if (typeof window !== 'undefined') {
             this.graphics.clear()

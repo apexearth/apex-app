@@ -1,7 +1,13 @@
 language: node_js
 node_js:
 - '8'
-- '9'
-- '10'
 script:
 - npm test
+deploy:
+  provider: npm
+  email: apexearth@gmail.com
+  api_key:
+    secure: Q3Sjh0UndTcXcM0PRg4NA2g7tl/ePN7dwLtCcW9n36WsxyJhamaU4K8yhmDj/u8aXUTsHKLHHV8p0VNp4z1vPxxZZd3eADtn3sOt4RN5GJC+WUCHmZL3bXhsYfP7mNK/nKApt/DsZO0rnPpj3a3aDLVP4VGMOPb7br+YiRqNJgvdDLrJm00FHPOwgf62tczMNazaVwnHvMhf/ycQcV44E1593k6nh93CaFLfGy+0tiEbSSVX1rjXoC0sug8yvcDjBcdmPr4aYuDvn2TepeknQCos6nGi1BbxCjQgKsW0Bqi3oMMdCu3iT5KbwEX9mGBKgg6/e0ZkpFytRCW8C0/9TKJRwdSMWTjDLPMdceeG3dJ1kS76d3nxLE/BoMy95UJPf6co6v2n7rsr4cenViT6LumvZkhXPBNH6otAQdIey0I+ox+c5y7/dtRSQnunBE2E0Mgg7GRX/fl1Na7/RRWuHsbw8X7RyLR8bzRibHHl/hj7PCZS7Nfp0PNDKH7JTGFjobpES93qv0Wbiq0GvYhV1q/BPZQJ/vuTVcxoYR2qb+eDUDOn8FvANW7FYkNA7THtTfwJuZ1PJG1rhHqfMogmKf9xKFC58AGnzq8gZWfilD5mkC1SJsLF5SHReN+01QwzJP0YdXowgDqE3Q6V0JCqwJIyWd6wFOLqDs2hNWt8/v4=
+  on:
+    tags: true
+    repo: apexearth/apex-app
