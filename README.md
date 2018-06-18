@@ -3,6 +3,13 @@
 ## apex-app
 For creating interactive apps using *pixi.js*.
 
+## Example App
+
+Particle Sandbox  
+URL: http://particlesandbox.com  
+GitHub: https://github.com/apexearth/particle-sandbox  
+App Class: https://github.com/apexearth/particle-sandbox/blob/develop/app/ParticleSandbox.js#L25
+
 ### Basic Usage
 
 1. Create an App.
