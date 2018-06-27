@@ -33,7 +33,7 @@ const {
 class Game extends App {
    constructor() {
        super()
-       let obj = new AppObject({parent: this})
+       let obj = new AppObject({app: this, parent: this})
        obj.graphics.beginFill(0xffffff, 1)
        obj.graphics.drawRect(0, 0, 10, 10)
        obj.graphics.endFill()
