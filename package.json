@@ -1,6 +1,6 @@
 {
   "name": "apex-app",
-  "version": "6.1.2",
+  "version": "7.0.0",
   "description": "For creating interactive apps using *pixi.js*.",
   "main": "src/index.js",
   "scripts": {
@@ -33,7 +33,9 @@
     }
   },
   "dependencies": {
-    "pixi.js": "^4.5.3"
+    "pixi.js": "^4.5.3",
+    "user-input": "^1.5.0",
+    "user-input-mapping": "^1.4.1"
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.24.1",

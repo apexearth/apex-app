@@ -4,6 +4,7 @@ if (typeof window !== 'undefined') {
 const {EventEmitter} = require('events')
 const _window        = require('./window')
 const setting        = require('./setting')
+const UserInput      = require('./UserInput')
 
 /**
  * The core app containing the update loop.
@@ -51,6 +52,8 @@ class App extends EventEmitter {
         this.zoomSpeed = 10
 
         this._paused = false
+
+        this.userInput = new UserInput({app: this})
     }
 
     /**
@@ -185,6 +188,7 @@ class App extends EventEmitter {
      * @param seconds {Number}
      */
     update(seconds) {
+        this.userInput.update(seconds)
         this.updateZoom(seconds)
         if (this.paused) return
 
