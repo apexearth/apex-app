@@ -5,6 +5,7 @@ const {EventEmitter} = require('events')
 const _window        = require('./window')
 const setting        = require('./setting')
 const UserInput      = require('./UserInput')
+const Mapping        = require('user-input-mapping')
 
 /**
  * The core app containing the update loop.
@@ -23,7 +24,7 @@ class App extends EventEmitter {
          * The object type. ("app")
          * @type {string}
          */
-        this.type            = 'app'
+        this.type = 'app'
 
         /**
          * The AppObjects added to the App.
@@ -54,6 +55,10 @@ class App extends EventEmitter {
         this._paused = false
 
         this.userInput = new UserInput({app: this})
+    }
+
+    createInputMapping(mapping) {
+        return new Mapping(this.userInput.inputs, mapping, false)
     }
 
     /**
